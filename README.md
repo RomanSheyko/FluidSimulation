@@ -2,7 +2,8 @@
 Simple fluid simulation
 
 # Additional libraries
-SFML\n
+SFML
+
 GLM
 
 # Build
