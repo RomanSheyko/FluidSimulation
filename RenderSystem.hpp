@@ -1,13 +1,17 @@
-//
-//  RenderSystem.hpp
-//  FluidSimulation
-//
-//  Created by Roman on 10.10.2021.
-//
-
 #ifndef RenderSystem_hpp
 #define RenderSystem_hpp
+#include <SFML/Graphics.hpp>
 
-#include <stdio.h>
+class RenderSystem {
+public:
+    RenderSystem(unsigned int width, unsigned int height, const std::string& windowName);
+    ~RenderSystem();
+    void Start();
+protected:
+    virtual void Update();
+private:
+    sf::RenderWindow window;
+    
+};
 
 #endif /* RenderSystem_hpp */
