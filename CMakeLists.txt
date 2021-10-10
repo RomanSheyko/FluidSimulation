@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 2 COMPONENTS network audio graphics window system REQUIRED)
-#find_package(GLM REQUIRED)
-#include_directories(${GLM_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB SRCS *.cpp *.h *.hpp)
 

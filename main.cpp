@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #define GLM_FORCE_RADIANS
-//#include <GLM/GLM.hpp>
+#include <GLM/GLM.hpp>
 #include "RenderSystem.hpp"
 
 int main()
