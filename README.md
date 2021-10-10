@@ -6,8 +6,21 @@ SFML
 GLM
 
 # Build
+```sh
 mkdir build
+```
+```sh
 cd build
-MacOS: cmake -G "Xcode" ..
-Windows: cmake -G "Visual Studio" ..
-Linux: cmake ..
+```
+MacOS:
+```sh
+cmake -G "Xcode" ..
+```
+Windows:
+```sh
+cmake -G "Visual Studio" ..
+```
+Linux: 
+```sh
+cmake ..
+```
