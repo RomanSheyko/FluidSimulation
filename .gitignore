@@ -1,2 +1,7 @@
 /build
 *.txt.user
+
+# editors
+.ccls
+.vim
+.idea
