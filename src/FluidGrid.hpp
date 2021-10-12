@@ -10,12 +10,11 @@ public:
    FluidGrid(int gridWidth, int gridHeight);
    
    struct CellInfo {
-      glm::vec2 velocityU;
-      glm::vec2 velocityV;
+      glm::vec2 velocity;
       float pressure = 0.f;
    };
    
-   void SetVelocityAt(const glm::vec2& pos, const glm::vec2& velocityU, const glm::vec2& velocityV);
+   void SetVelocityAt(const glm::vec2& pos, const glm::vec2& velocity);
    void SetPressureAt(const glm::vec2& pos, float pressure);
    void SetCellInfoAt(const glm::vec2& pos, const CellInfo& cellInfo);
 private:
