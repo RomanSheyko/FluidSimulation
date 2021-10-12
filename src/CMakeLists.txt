@@ -9,6 +9,7 @@ find_package(
   SFML 2
   COMPONENTS network audio graphics window system
   REQUIRED)
+find_package(GLM REQUIRED)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 file(GLOB SRCS *.cpp *.hpp)

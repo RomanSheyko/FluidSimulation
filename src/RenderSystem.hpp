@@ -4,16 +4,15 @@
 
 class RenderSystem {
 public:
-  RenderSystem(unsigned int width, unsigned int height,
-               const std::string &windowName);
-  ~RenderSystem();
-  void Start();
+   RenderSystem(unsigned int width, unsigned int height, const std::string &windowName);
+   ~RenderSystem();
+   void Start();
 
 protected:
-  virtual void Update();
+   virtual void Update();
 
 private:
-  sf::RenderWindow window;
+   sf::RenderWindow window;
 };
 
 #endif /* RenderSystem_hpp */
