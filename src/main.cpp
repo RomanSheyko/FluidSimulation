@@ -5,7 +5,7 @@
 #include "FluidGrid.hpp"
 
 int main() {
-   RenderSystem render(800, 600, "Fluid Simulation");
+   RenderSystem render(1400, 1000, "Fluid Simulation");
    render.Start();
    
    return 0;
