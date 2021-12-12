@@ -19,7 +19,7 @@ public:
    void SetPressureAt(const glm::ivec2& pos, float pressure);
    void SetCellInfoAt(const glm::ivec2& pos, const CellInfo& cellInfo);
    
-   CellInfo GetCellInfoAt(const glm::ivec2& pos) const { return grid[glm::clamp(pos.y, 0, gridHeight)][glm::clamp(pos.x, 0, gridWidth)]; };
+   CellInfo GetCellInfoAt(const glm::ivec2& pos) const { return grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)]; };
    glm::vec2 GetVelocityAt(const glm::ivec2& pos) const { return GetCellInfoAt(pos).velocity; };
    float GetPressureAt(const glm::ivec2& pos) const { return GetCellInfoAt(pos).pressure; };
    

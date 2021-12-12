@@ -1,13 +1,15 @@
 #ifndef Simulation_hpp
 #define Simulation_hpp
 #include "FluidGrid.hpp"
+#include <GLM/gtc/random.hpp>
 
+// Simulation from http://graphics.cs.cmu.edu/nsp/course/15-464/Fall09/papers/StamFluidforGames.pdf article
 class SimpleRules {
 public:
    SimpleRules(FluidGrid& grid) : grid(grid), prev_grid(grid) {
       for (int y = 0; y < grid.GetHeight(); y++) {
          for (int x = 0; x < grid.GetWigth(); x++) {
-            grid.SetVelocityAt({x, y}, {0.f, -1.f});
+            grid.SetVelocityAt({x, y}, {-0.1f, -0.1f});
          }
       }
       
@@ -15,6 +17,9 @@ public:
    }
    
    void Update(float dt);
+   
+   void Diffuse(float dt, float diffusion);
+   void Addvect(float dt);
 private:
    FluidGrid& grid;
    FluidGrid prev_grid;
@@ -29,7 +34,7 @@ public:
       rules.Update(dt);
    }
    
-   const FluidGrid& GetGrid() const { return grid; };
+   FluidGrid& GetGrid() { return grid; };
 private:
    FluidGrid grid;
    SimulationRules rules;

@@ -24,7 +24,7 @@ void FluidGrid::SetCellInfoAt(const glm::ivec2 &pos, const FluidGrid::CellInfo &
 
 
 void FluidGrid::SetPressureAt(const glm::ivec2 &pos, float pressure) {
-   grid[glm::clamp(pos.y, 0, gridHeight)][glm::clamp(pos.x, 0, gridWidth)].pressure = glm::clamp(pressure, 0.f, 1.f);
+   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].pressure = glm::clamp(pressure, 0.f, 1.f);
 }
 
 

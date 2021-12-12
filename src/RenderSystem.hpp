@@ -29,7 +29,7 @@ private:
    const glm::ivec3 shortVectorColor {0, 0, 0};
    
    Simulation<SimpleRules> simulation;
-   static const int cellSize = 50;
+   static const int cellSize = 25;
 };
 
 #endif /* RenderSystem_hpp */

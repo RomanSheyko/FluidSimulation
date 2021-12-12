@@ -10,8 +10,6 @@ RenderSystem::RenderSystem(int width, int height,
    window.setVerticalSyncEnabled(true);
    
    window.setFramerateLimit(60);
-   
-   dbgDrawVectorField = true;
 }
 
 void RenderSystem::Update(float dt) {
@@ -59,11 +57,20 @@ void RenderSystem::Start() {
          if (event.type == sf::Event::Closed) {
             window.close();
          }
+         
+//         if (event.type == sf::Event::MouseButtonPressed) {
+//            auto pos = sf::Mouse::getPosition(window);
+//            glm::ivec2 ipos {(int)(pos.x / simulation.GetGrid().GetWigth()), (int)(pos.y / simulation.GetGrid().GetHeight())};
+//            
+//            simulation.GetGrid().SetPressureAt(ipos, 1.f);
+//         }
       }
       
       sf::Time dt = deltaClock.restart();
       
       Update(dt.asSeconds());
+      
+      //sf::sleep(sf::milliseconds(1000));
    }
 }
 
