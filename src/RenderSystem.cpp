@@ -5,17 +5,11 @@
 
 RenderSystem::RenderSystem(int width, int height,
                            const std::string &windowName)
-    : window(sf::VideoMode(width, height), sf::String(windowName)), grid(width / cellSize, height / cellSize)
+    : window(sf::VideoMode(width, height), sf::String(windowName)), simulation(width / cellSize, height / cellSize)
 {
    window.setVerticalSyncEnabled(true);
    
    window.setFramerateLimit(60);
-   
-   for (int y = 0; y < grid.GetHeight(); y++) {
-      for (int x = 0; x < grid.GetWigth(); x++) {
-         grid.SetVelocityAt({x, y}, {0.f, -1.f});
-      }
-   }
    
    dbgDrawVectorField = true;
 }
@@ -23,13 +17,15 @@ RenderSystem::RenderSystem(int width, int height,
 void RenderSystem::Update(float dt) {
    window.clear(sf::Color::Black);
    
-   grid.Update(dt);
+   simulation.Update(dt);
    
    sf::RectangleShape rectangle(sf::Vector2f((float)cellSize, (float)cellSize));
    
    std::array<sf::Vertex, 2> line;
    std::array<sf::Vertex, 2> line2;
    std::array<sf::Vertex, 2> line3;
+   
+   auto grid = simulation.GetGrid();
    
    for (int y = 0; y < grid.GetHeight(); y++) {
       for (int x = 0; x < grid.GetWigth(); x++) {

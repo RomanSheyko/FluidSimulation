@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #define GLM_FORCE_RADIANS
 #include <GLM/GLM.hpp>
-#include "FluidGrid.hpp"
+#include "Simulation.hpp"
 
 class RenderSystem {
 public:
@@ -28,7 +28,7 @@ private:
    const glm::ivec3 longVectorColor {255, 255, 255};
    const glm::ivec3 shortVectorColor {0, 0, 0};
    
-   FluidGrid grid;
+   Simulation<SimpleRules> simulation;
    static const int cellSize = 50;
 };
 
