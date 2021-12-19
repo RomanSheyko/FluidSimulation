@@ -18,16 +18,16 @@ FluidGrid::FluidGrid(const FluidGrid& other) {
 
 
 void FluidGrid::SetCellInfoAt(const glm::ivec2 &pos, const FluidGrid::CellInfo &cellInfo) {
-   grid[glm::clamp(pos.y, 0, gridHeight)][glm::clamp(pos.x, 0, gridWidth)].pressure = cellInfo.pressure;
-   grid[glm::clamp(pos.y, 0, gridHeight)][glm::clamp(pos.x, 0, gridWidth)].velocity = cellInfo.velocity;
+   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].pressure = cellInfo.pressure;
+   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].velocity = cellInfo.velocity;
 }
 
 
 void FluidGrid::SetPressureAt(const glm::ivec2 &pos, float pressure) {
-   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].pressure = glm::clamp(pressure, 0.f, 1.f);
+   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].pressure = pressure;
 }
 
 
 void FluidGrid::SetVelocityAt(const glm::ivec2 &pos, const glm::vec2& velocity) {
-   grid[glm::clamp(pos.y, 0, gridHeight)][glm::clamp(pos.x, 0, gridWidth)].velocity = velocity;
+   grid[glm::clamp(pos.y, 0, gridHeight - 1)][glm::clamp(pos.x, 0, gridWidth - 1)].velocity = velocity;
 }

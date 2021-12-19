@@ -15,6 +15,20 @@ RenderSystem::RenderSystem(int width, int height,
 void RenderSystem::Update(float dt) {
    window.clear(sf::Color::Black);
    
+   if (mousePressed) {
+      auto pos = sf::Mouse::getPosition(window);
+      glm::ivec2 ipos {(int)(pos.x / cellSize), (int)(pos.y / cellSize)};
+      
+      for (int x = -1; x < 1; x++) {
+         for (int y = -1; y < 1; y++) {
+            simulation.GetGrid().SetPressureAt({ipos.x + x, ipos.y + y}, glm::clamp(simulation.GetGrid().GetPressureAt({ipos.x + x, ipos.y + y}) + 4.f, 0.f, 10.f));
+         }
+      }
+      glm::vec2 fpos {(float)ipos.x, (float)ipos.y};
+      simulation.GetGrid().SetVelocityAt(ipos, simulation.GetGrid().GetVelocityAt(ipos) + (fpos - prevPos) * 2.f);
+      prevPos = fpos;
+   }
+   
    simulation.Update(dt);
    
    sf::RectangleShape rectangle(sf::Vector2f((float)cellSize, (float)cellSize));
@@ -58,12 +72,14 @@ void RenderSystem::Start() {
             window.close();
          }
          
-//         if (event.type == sf::Event::MouseButtonPressed) {
-//            auto pos = sf::Mouse::getPosition(window);
-//            glm::ivec2 ipos {(int)(pos.x / simulation.GetGrid().GetWigth()), (int)(pos.y / simulation.GetGrid().GetHeight())};
-//            
-//            simulation.GetGrid().SetPressureAt(ipos, 1.f);
-//         }
+         if (event.type == sf::Event::MouseButtonPressed) {
+            mousePressed = true;
+            
+         }
+         
+         if (event.type == sf::Event::MouseButtonReleased) {
+            mousePressed = false;
+         }
       }
       
       sf::Time dt = deltaClock.restart();

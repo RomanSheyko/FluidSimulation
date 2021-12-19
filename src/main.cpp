@@ -5,8 +5,8 @@
 #include "FluidGrid.hpp"
 
 int main() {
-   RenderSystem render(1400, 1000, "Fluid Simulation");
-   render.dbgDrawVectorField = true;
+   RenderSystem render(1000, 1000, "Fluid Simulation");
+   //render.dbgDrawVectorField = true;
    render.Start();
    
    return 0;

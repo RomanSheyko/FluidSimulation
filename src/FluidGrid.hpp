@@ -46,8 +46,8 @@ public:
       grid = std::move(other.grid);
       return *this;
    }
-private:
    std::vector<std::vector<CellInfo>> grid;
+private:
    
    int gridWidth;
    int gridHeight;
