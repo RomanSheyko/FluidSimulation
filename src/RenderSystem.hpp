@@ -24,14 +24,16 @@ private:
    void DrawVector(const glm::vec2& pos, const glm::vec2& vec, std::array<sf::Vertex, 2>& line, std::array<sf::Vertex, 2>& line2, std::array<sf::Vertex, 2>& line3);
    sf::RenderWindow window;
    
-   const glm::ivec3 hightPressureColor {255, 0, 0};
-   const glm::ivec3 lowPressureColor {0, 0, 255};
+   const glm::ivec3 hightPressureColor {0, 0, 255};
+   const glm::ivec3 lowPressureColor {0, 0, 0};
    
    const glm::ivec3 longVectorColor {255, 255, 255};
    const glm::ivec3 shortVectorColor {0, 0, 0};
    
    Simulation<SimpleRules> simulation;
-   static const int cellSize = 10;
+   static const int cellSize = 5;
+   
+   sf::VertexArray rects;
    
    bool mousePressed = false;
    glm::vec2 prevPos = {0.f, 0.f};

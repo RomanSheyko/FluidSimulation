@@ -4,8 +4,14 @@
 
 void SimpleRules::Update(float dt) {
    // velocity step
+//   for (int y = 0; y < grid.GetHeight(); y++) {
+//      for (int x = 0; x < grid.GetWigth(); x++) {
+//
+//         grid.SetVelocityAt({x, y}, grid.GetVelocityAt({x, y}) + glm::vec2(0.f, 9.8f) * 0.00001f);
+//      }
+//   }
    std::swap(grid, prev_grid);
-   DiffuseVel(dt, 0.001f, 1);
+   DiffuseVel(dt, 0.0001f, 1);
    Project();
    std::swap(grid, prev_grid);
    AdvectVel(dt, 1);
@@ -13,7 +19,7 @@ void SimpleRules::Update(float dt) {
    
    // density step
    std::swap(grid, prev_grid);
-   Diffuse(dt, 0.f);
+   Diffuse(dt, 0.0005f);
    std::swap(grid, prev_grid);
    Advect(dt, 0);
    

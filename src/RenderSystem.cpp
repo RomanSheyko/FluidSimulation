@@ -10,6 +10,8 @@ RenderSystem::RenderSystem(int width, int height,
    window.setVerticalSyncEnabled(true);
    
    window.setFramerateLimit(60);
+   rects.setPrimitiveType(sf::Quads);
+   rects.resize(simulation.GetGrid().GetHeight() * simulation.GetGrid().GetWigth() * 4);
 }
 
 void RenderSystem::Update(float dt) {
@@ -19,8 +21,8 @@ void RenderSystem::Update(float dt) {
       auto pos = sf::Mouse::getPosition(window);
       glm::ivec2 ipos {(int)(pos.x / cellSize), (int)(pos.y / cellSize)};
       
-      for (int x = -1; x < 1; x++) {
-         for (int y = -1; y < 1; y++) {
+      for (int x = -4; x < 4; x++) {
+         for (int y = -4; y < 4; y++) {
             simulation.GetGrid().SetPressureAt({ipos.x + x, ipos.y + y}, glm::clamp(simulation.GetGrid().GetPressureAt({ipos.x + x, ipos.y + y}) + 4.f, 0.f, 10.f));
          }
       }
@@ -30,8 +32,6 @@ void RenderSystem::Update(float dt) {
    }
    
    simulation.Update(dt);
-   
-   sf::RectangleShape rectangle(sf::Vector2f((float)cellSize, (float)cellSize));
    
    std::array<sf::Vertex, 2> line;
    std::array<sf::Vertex, 2> line2;
@@ -45,11 +45,23 @@ void RenderSystem::Update(float dt) {
          
          float pressure = grid.GetPressureAt(pos);
          glm::ivec3 color = GetColorByPressure(pressure);
-         rectangle.setFillColor(sf::Color({static_cast<sf::Uint8>(color.x), static_cast<sf::Uint8>(color.y), static_cast<sf::Uint8>(color.z)}));
+         auto sfColor = sf::Color({static_cast<sf::Uint8>(color.x), static_cast<sf::Uint8>(color.y), static_cast<sf::Uint8>(color.z)});
          
-         rectangle.setPosition(x * cellSize, y * cellSize);
+         auto position = sf::Vector2f(x * cellSize, y * cellSize);
          
-         window.draw(rectangle);
+         sf::Vertex v0, v1, v2, v3;
+         v0.position = position;
+         v0.color = sfColor;
+         v1.position = position + sf::Vector2f((float)cellSize, 0.f);
+         v1.color = sfColor;
+         v2.position = position + sf::Vector2f((float)cellSize, (float)cellSize);
+         v2.color = sfColor;
+         v3.position = position + sf::Vector2f(0.f, (float)cellSize);
+         v3.color = sfColor;
+         rects.append(v0);
+         rects.append(v1);
+         rects.append(v2);
+         rects.append(v3);
          
          glm::vec2 velocity = grid.GetVelocityAt(pos);
          
@@ -58,8 +70,11 @@ void RenderSystem::Update(float dt) {
          }
       }
    }
-
+   window.draw(rects);
+   
    window.display();
+   
+   rects.clear();
 }
 
 void RenderSystem::Start() {
@@ -85,8 +100,6 @@ void RenderSystem::Start() {
       sf::Time dt = deltaClock.restart();
       
       Update(dt.asSeconds());
-      
-      //sf::sleep(sf::milliseconds(1000));
    }
 }
 
